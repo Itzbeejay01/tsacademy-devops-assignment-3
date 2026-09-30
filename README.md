@@ -132,7 +132,11 @@ The jobs are intentionally ordered with `needs:`:
 
 ## CI Failure Demonstration
 
-A feature branch is used to deliberately introduce a failing test so that GitHub Actions records a failed CI run. The failure is then corrected in a follow-up commit and CI is run again successfully. The final repository state is passing.
+The branch `feature/ci-failure-demo` was used to demonstrate CI failure and recovery as required by the assignment.
+
+- Commit `fd04836` intentionally added a failing test. GitHub Actions run **#4** failed as expected.
+- Commit `2763b95` removed the intentional failure. GitHub Actions run **#6** completed successfully with `validate`, `test`, and `docker` all passing.
+- The final repository state contains the corrected test suite and a passing CI pipeline.
 
 ## Local Grading
 
