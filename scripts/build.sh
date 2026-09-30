@@ -12,13 +12,24 @@ if ! command -v docker >/dev/null 2>&1; then
 fi
 
 echo "Building Docker image: $IMAGE"
-docker build -t "$IMAGE" .
+if ! docker build -t "$IMAGE" .; then
+  echo "ERROR: Docker image build failed." >&2
+  exit 1
+fi
 
 echo "Smoke test: help"
-docker run --rm "$IMAGE" help >/tmp/devops-tool-help.log 2>&1
+if ! docker run --rm "$IMAGE" help >/tmp/devops-tool-help.log 2>&1; then
+  echo "ERROR: help smoke test failed." >&2
+  cat /tmp/devops-tool-help.log
+  exit 1
+fi
 
 echo "Smoke test: system-info"
-docker run --rm "$IMAGE" system-info >/tmp/devops-tool-system.log 2>&1
+if ! docker run --rm "$IMAGE" system-info >/tmp/devops-tool-system.log 2>&1; then
+  echo "ERROR: system-info smoke test failed." >&2
+  cat /tmp/devops-tool-system.log
+  exit 1
+fi
 
 echo "Smoke test: invalid command must fail"
 docker run --rm "$IMAGE" invalid-command >/tmp/devops-tool-invalid.log 2>&1
