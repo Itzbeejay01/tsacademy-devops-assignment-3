@@ -50,9 +50,6 @@ expect_rc "port 0 returns exit code 2" 2 "$APP" check-port localhost 0
 expect_rc "port 65536 returns exit code 2" 2 "$APP" check-port localhost 65536
 expect_rc "missing command returns exit code 2" 2 "$APP"
 
-# Temporary intentional failure for the required CI failure demonstration.
-expect_rc "intentional CI failure demonstration" 0 bash -c "exit 1"
-
 echo
 echo "=============================="
 echo "Tests passed: $PASS"
