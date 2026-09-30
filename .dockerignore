@@ -1,0 +1,12 @@
+.git
+.gitignore
+.github
+*.log
+*.tmp
+.DS_Store
+.vscode
+.idea
+README.md
+grade.sh
+tests
+scripts
